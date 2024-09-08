@@ -17,6 +17,8 @@ kubectl get all -n microservices-namespace
 
 ## Remove Everything from the Namespace
 ```
+helm list --all-namespaces | grep microservices-namespace # -> microservices
+helm uninstall microservices --namespace microservices-namespace
 kubectl delete namespace microservices-namespace
 ```
 
