@@ -1,7 +1,5 @@
 # microservices-namespace
 
-
-
 ## Recreate the Namespace
 ```
 kubectl create namespace microservices-namespace
@@ -11,7 +9,6 @@ kubectl create namespace microservices-namespace
 ```
 kubectl apply -f k8s/gateway-deployment.yaml
 kubectl apply -f k8s/microservice-1-deployment.yaml
-kubectl apply -f k8s/gateway-service.yaml
 kubectl apply -f k8s/ingress.yaml 
 ```
 
@@ -20,9 +17,13 @@ kubectl apply -f k8s/ingress.yaml
 kubectl get all -n microservices-namespace
 ```
 
-
 ## Remove Everything from the Namespace
 ```
 kubectl delete namespace microservices-namespace
+```
+
+## Force the Deployment to Restart
+```
+kubectl rollout restart deployment gateway -n microservices-namespace
 ```
 

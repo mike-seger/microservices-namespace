@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.microservice1.name }}
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.microservice1.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.microservice1.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.microservice1.name }}
+    spec:
+      containers:
+        - name: {{ .Values.microservice1.name }}
+          image: "{{ .Values.microservice1.image.repository }}:{{ .Values.microservice1.image.tag }}"
+          ports:
+            - containerPort: {{ .Values.microservice1.service.port }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.microservice1.name }}
+  namespace: {{ .Values.namespace }}
+spec:
+  type: ClusterIP
+  selector:
+    app: {{ .Values.microservice1.name }}
+  ports:
+    - protocol: TCP
+      port: {{ .Values.microservice1.service.port }}

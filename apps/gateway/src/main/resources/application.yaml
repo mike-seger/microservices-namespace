@@ -1,11 +1,16 @@
 server:
   port: 8080
 
-spring:
-  cloud:
-    gateway:
-      routes:
-        - id: microservice-1-route
-          uri: http://microservice-1.microservices-namespace.svc.cluster.local:8080
-          predicates:
-            - Path=/microservice1/**
+spring.cloud.gateway:
+  routes:
+    - id: microservice-1-route
+      uri: http://microservice-1.microservices-namespace.svc.cluster.local:8080
+      predicates:
+        - Path=/microservice-1/**
+      filters:
+        - StripPrefix=1
+
+management:
+  endpoints.web.exposure.include: "*"
+  endpoint.health.show-details: always
+  

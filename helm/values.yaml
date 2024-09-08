@@ -1,0 +1,21 @@
+namespace: microservices-namespace
+
+gateway:
+  name: gateway
+  replicaCount: 2
+  image:
+    repository: gateway
+    tag: "0.0.1-SNAPSHOT"
+  service:
+    type: LoadBalancer
+    port: 80
+    targetPort: 8080
+
+microservice1:
+  name: microservice-1
+  replicaCount: 2
+  image:
+    repository: microservice-1
+    tag: "0.0.1-SNAPSHOT"
+  service:
+    port: 8080
