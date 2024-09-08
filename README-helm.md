@@ -34,3 +34,11 @@ kubectl get pods --all-namespaces | grep Terminating | tr -s " "|\
 		kubectl delete pod "$p" -n "$n" --grace-period=0 --force
 	done
 ```
+
+## Port forwarding
+```
+nohup kubectl port-forward service/gateway 8080:80 -n microservices-namespace &
+
+nohup kubectl port-forward service/microservice-1 8081:8080 -n microservices-namespace &
+```
+
